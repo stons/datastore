@@ -65,6 +65,7 @@ project(":data-sample"){
         compile(project(":data-jpa"))
         compile("com.h2database:h2")
         kapt("com.querydsl:querydsl-apt:${querydslVersion}:jpa")
+        compile("org.springframework.boot:spring-boot-starter-web")
     }
 
 }

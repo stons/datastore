@@ -9,7 +9,6 @@ spring:
       #none, validate, update, create, create-drop
       ddl-auto: none
     show-sql: true
-    open-in-view: true
 
   dbunit:
     operationType: CLEAN_INSERT

@@ -20,7 +20,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-@Transactional
+//@Transactional
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class BaseDataTestCase {
