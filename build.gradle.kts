@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 buildscript {
     val repos by extra { listOf("http://maven.aliyun.com/nexus/content/groups/public","https://jcenter.bintray.com/") }
     repositories {
-        repositories { for (u in repos) { maven(u) } }
+        for (u in repos) { maven(u) }
         google()
     }
 }
@@ -28,9 +28,12 @@ configure<JavaPluginConvention> {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+val repos:List<String> by extra
+val querydslVersion = "4.2.1"
 allprojects{
     repositories {
-        mavenCentral()
+        mavenLocal()
+        for (u in repos) { maven(u) }
     }
 }
 
@@ -42,6 +45,13 @@ subprojects{
     apply(plugin = "io.spring.dependency-management")
     apply(plugin  = "org.springframework.boot")
     apply(plugin  = "maven-publish")
+    apply(plugin = "org.jetbrains.kotlin.kapt")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+
+    dependencies{
+        kapt("com.querydsl:querydsl-apt:${querydslVersion}:jpa")
+    }
+
     tasks{
         "jar"(Jar::class){
             enabled = true
@@ -49,12 +59,26 @@ subprojects{
         "bootJar"(BootJar::class){
             enabled = false
         }
-    }
+        create("sourcesJar",Jar::class){
+            classifier = "sources"
+            from(sourceSets.main.get().allJava)
+        }
 
+        withType(PublishToMavenRepository::class){
+            onlyIf {
+                (repository == publishing.repositories["hhkj"] &&
+                        publication == publishing.publications["binary"])
+//                    ||
+//                    (repository == publishing.repositories["internal"] &&
+//                            publication == publishing.publications["binaryAndSources"])
+            }
+        }
 
-    task<Jar>("sourcesJar") {
-        classifier = "sources"
-        from(sourceSets.main.get().allJava)
+        withType(PublishToMavenLocal::class){
+            onlyIf {
+                publication == publishing.publications["binaryAndSources"]
+            }
+        }
     }
 
     publishing {
@@ -68,7 +92,6 @@ subprojects{
             }
         }
         repositories {
-            // change URLs to point to your repos, e.g. http://my.org/repo
             maven {
                 name = "hhkj"
                 url = uri("http://192.168.1.222:8092/repository/maven-snapshots/")
@@ -83,23 +106,6 @@ subprojects{
 //            }
         }
     }
-
-    tasks.withType<PublishToMavenRepository> {
-        onlyIf {
-            (repository == publishing.repositories["hhkj"] &&
-                    publication == publishing.publications["binary"])
-//                    ||
-//                    (repository == publishing.repositories["internal"] &&
-//                            publication == publishing.publications["binaryAndSources"])
-        }
-    }
-
-    tasks.withType<PublishToMavenLocal>() {
-        onlyIf {
-            publication == publishing.publications["binaryAndSources"]
-        }
-    }
-
 }
 
 project(":data-jpa"){
@@ -109,20 +115,25 @@ project(":data-jpa"){
         api("org.springframework.boot:spring-boot-starter-test")
         api("org.dbunit:dbunit:2.5.4")
         api("org.apache.ant:ant:1.8.2")
+        api("vip.codemonkey.develop:common:1.0-SNAPSHOT")
     }
 }
 
+//project(":data-redis"){
+//    dependencies{
+//        api("org.springframework.boot:spring-boot-starter-data-redis")
+//        api("org.springframework.boot:spring-boot-starter-test")
+//        api("vip.codemonkey.develop:common:1.0-SNAPSHOT")
+//    }
+//}
+
+
 project(":data-sample"){
-    val querydslVersion = "4.2.1"
-    apply(plugin = "org.jetbrains.kotlin.kapt")
-    apply(plugin = "org.jetbrains.kotlin.jvm")
     dependencies{
         compile(project(":data-jpa"))
         compile("com.h2database:h2")
-        kapt("com.querydsl:querydsl-apt:${querydslVersion}:jpa")
         compile("org.springframework.boot:spring-boot-starter-web")
     }
-
 }
 
 
