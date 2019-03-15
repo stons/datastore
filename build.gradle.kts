@@ -94,7 +94,7 @@ subprojects{
         repositories {
             maven {
                 name = "hhkj"
-                url = uri("http://192.168.1.222:8092/repository/maven-snapshots/")
+                url = uri("http://192.168.1.222:8092/repository/maven-releases/")
                 credentials{
                     username = "admin"
                     password = "am@hao1!2"
@@ -115,7 +115,7 @@ project(":data-jpa"){
         api("org.springframework.boot:spring-boot-starter-test")
         api("org.dbunit:dbunit:2.5.4")
         api("org.apache.ant:ant:1.8.2")
-        api("vip.codemonkey.develop:common:1.0-SNAPSHOT")
+//        api("vip.codemonkey.develop:common:1.0-SNAPSHOT")
     }
 }
 
