@@ -84,6 +84,7 @@ subprojects{
     publishing {
         publications {
             create<MavenPublication>("binary") {
+                version = "${project.version}"
                 from(components["java"])
             }
             create<MavenPublication>("binaryAndSources") {
@@ -94,7 +95,7 @@ subprojects{
         repositories {
             maven {
                 name = "hhkj"
-                url = uri("http://192.168.1.222:8092/repository/maven-releases/")
+                url = uri("http://192.168.1.222:8092/repository/maven-snapshots/")
                 credentials{
                     username = "admin"
                     password = "am@hao1!2"
@@ -125,7 +126,6 @@ project(":data-jpa"){
 //    dependencies{
 //        api("org.springframework.boot:spring-boot-starter-data-redis")
 //        api("org.springframework.boot:spring-boot-starter-test")
-//        api("vip.codemonkey.develop:common:1.0-SNAPSHOT")
 //    }
 //}
 
