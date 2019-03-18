@@ -7,7 +7,7 @@ spring:
   jpa:
     hibernate:
       #none, validate, update, create, create-drop
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
     open-in-view: true
 

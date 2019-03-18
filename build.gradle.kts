@@ -95,7 +95,7 @@ subprojects{
         repositories {
             maven {
                 name = "hhkj"
-                url = uri("http://192.168.1.222:8092/repository/maven-snapshots/")
+                url = uri("http://192.168.1.222:8092/repository/maven-releases/")
                 credentials{
                     username = "admin"
                     password = "am@hao1!2"
