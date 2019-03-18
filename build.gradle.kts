@@ -115,6 +115,8 @@ project(":data-jpa"){
         api("org.springframework.boot:spring-boot-starter-test")
         api("org.dbunit:dbunit:2.5.4")
         api("org.apache.ant:ant:1.8.2")
+        compileOnly("com.fasterxml.jackson.core:jackson-annotations:2.9.8")
+        api("org.hibernate.validator:hibernate-validator:6.0.13.Final")
 //        api("vip.codemonkey.develop:common:1.0-SNAPSHOT")
     }
 }
