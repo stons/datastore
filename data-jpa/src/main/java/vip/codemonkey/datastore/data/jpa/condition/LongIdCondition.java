@@ -2,11 +2,15 @@ package vip.codemonkey.datastore.data.jpa.condition;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class LongIdCondition implements Serializable {
     protected Long id;
-    protected LocalDateTime createdAt;
-    protected LocalDateTime updatedAt;
+    protected List<Long> ids;
+    protected LocalDateTime createdAtStart;
+    protected LocalDateTime createdAtEnd;
+    protected LocalDateTime updatedAtStart;
+    protected LocalDateTime updatedAtEnd;
 
     public Long getId() {
         return id;
@@ -16,19 +20,43 @@ public class LongIdCondition implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public List<Long> getIds() {
+        return ids;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setIds(List<Long> ids) {
+        this.ids = ids;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getCreatedAtStart() {
+        return createdAtStart;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setCreatedAtStart(LocalDateTime createdAtStart) {
+        this.createdAtStart = createdAtStart;
+    }
+
+    public LocalDateTime getCreatedAtEnd() {
+        return createdAtEnd;
+    }
+
+    public void setCreatedAtEnd(LocalDateTime createdAtEnd) {
+        this.createdAtEnd = createdAtEnd;
+    }
+
+    public LocalDateTime getUpdatedAtStart() {
+        return updatedAtStart;
+    }
+
+    public void setUpdatedAtStart(LocalDateTime updatedAtStart) {
+        this.updatedAtStart = updatedAtStart;
+    }
+
+    public LocalDateTime getUpdatedAtEnd() {
+        return updatedAtEnd;
+    }
+
+    public void setUpdatedAtEnd(LocalDateTime updatedAtEnd) {
+        this.updatedAtEnd = updatedAtEnd;
     }
 }

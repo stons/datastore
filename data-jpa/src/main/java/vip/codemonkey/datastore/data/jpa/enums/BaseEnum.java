@@ -7,5 +7,5 @@ package vip.codemonkey.datastore.data.jpa.enums;
  * @description
  */
 public interface BaseEnum {
-    public String getLable();
+    public String getLabel();
 }
