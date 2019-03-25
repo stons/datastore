@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class LongIdCondition implements Serializable {
+public abstract class LongIdCondition implements Serializable {
     protected Long id;
     protected List<Long> ids;
     protected LocalDateTime createdAtStart;

@@ -3,12 +3,14 @@ package vip.codemonkey.datastore.data.sample.repository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import vip.codemonkey.datastore.data.jpa.repository.BaseDataTestCase;
 import vip.codemonkey.datastore.data.sample.condition.UserCondition;
 import vip.codemonkey.datastore.data.sample.entity.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 public class UserRepositoryTest extends BaseDataTestCase {
@@ -38,5 +40,16 @@ public class UserRepositoryTest extends BaseDataTestCase {
 
     }
 
+    @Test
+    @Transactional
+    public void testSave(){
+        User user = new User();
+        user.setName("234234243");
+        User result = repository.save(user);
+        logger.debug("result is {}",result);
+        Assert.assertNotNull(result.getId());
+        List<User> users = repository.findAll();
+        logger.debug("users is {}",users);
+    }
 
 }

@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 
 public class Pageable implements Serializable{
-    private int page = 1;
+    private int page = 0;
     private int size = 10;
     private Sort sort;
     private Sort.Direction direction;
