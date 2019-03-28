@@ -17,12 +17,12 @@ public abstract class LongIdEntity implements Serializable {
     protected Long id;
     @CreatedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "created_at",updatable = false)
+    @Column(name = "created_at", updatable = false)
     protected LocalDateTime createdAt;
     @LastModifiedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "updated_at")
-    protected LocalDateTime updatedAt;
+    protected LocalDateTime updatedAt = LocalDateTime.now();
 
     public Long getId() {
         return id;
