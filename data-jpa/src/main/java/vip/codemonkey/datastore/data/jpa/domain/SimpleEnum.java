@@ -12,6 +12,7 @@ public class SimpleEnum implements Serializable {
     private Integer origin;
     private String value;
     private String label;
+    private String dictValue;
 
     public SimpleEnum() {
     }
@@ -40,10 +41,24 @@ public class SimpleEnum implements Serializable {
         this.label = label;
     }
 
+    public String getDictValue() {
+        return dictValue;
+    }
+
+    public void setDictValue(String dictValue) {
+        this.dictValue = dictValue;
+    }
     public SimpleEnum(Integer origin, String value, String label) {
         this.origin = origin;
         this.value = value;
         this.label = label;
+    }
+
+    public SimpleEnum(Integer origin, String value, String label, String dictValue) {
+        this.origin = origin;
+        this.value = value;
+        this.label = label;
+        this.dictValue = dictValue;
     }
 
     @Override
